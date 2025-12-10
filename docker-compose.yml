@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  webhook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount configuration file
+      - ./config.toml:/app/config.toml:ro
+      # Mount debug directory (optional for production)
+      - ./debug:/app/debug
+    environment:
+      - NODE_ENV=production
+      - CONFIG=config.toml
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    # Resource limits for production
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+        reservations:
+          memory: 128M
+          cpus: '0.25'
+
+networks:
+  default:

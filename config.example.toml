@@ -1,0 +1,47 @@
+# GitHub Webhook Configuration Example
+# Copy this file to config.toml and fill in your values
+
+[app]
+# Enable debug mode (saves webhook payloads to debug/ directory)
+debug = true
+# Port to run the webhook server on
+port = 3000
+
+[github]
+# GitHub webhook secret for signature verification
+# Generate this in your GitHub repository settings > Webhooks
+secret = "your-webhook-secret-here"
+
+[discord]
+# Discord webhook URL to send messages to
+# Create this in your Discord server settings > Integrations > Webhooks
+webhook_url = "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN"
+
+# Event configuration - enable/disable specific event types
+[events]
+push = true           # Push events (commits)
+issues = true         # Issues events (opened, closed, etc.)
+workflow_run = true   # GitHub Actions workflow runs
+workflow_job = true   # Individual workflow jobs
+
+# Detailed configuration for each event type
+[events_config.push]
+show_file_changes = true    # Show file change summary
+max_commits_shown = 5       # Maximum commits to display
+show_commit_details = true  # Show individual commit messages
+embed_color = 0x00ff00      # Green color for push events
+
+[events_config.issues]
+show_labels = true          # Show issue labels
+show_assignees = true       # Show assigned users
+embed_color = 0xff9900      # Orange color for issues
+
+[events_config.workflow_run]
+show_duration = true        # Show workflow duration
+show_conclusion = true      # Show success/failure status
+embed_color = 0x0099ff      # Blue color for workflows
+
+[events_config.workflow_job]
+show_steps = false          # Show individual job steps (not implemented)
+show_runner = true          # Show runner information
+embed_color = 0x6600cc      # Purple color for jobs

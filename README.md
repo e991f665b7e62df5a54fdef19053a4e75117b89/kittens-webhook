@@ -7,12 +7,15 @@ webhook handler for cats.tf.
 ## Setup
 
 <!-- dont include git cloning -->
-```
-$ ...
+```bash
+$ bun install
+$ bun run src/main.ts
 ```
 
-<!-- ## Docker
+## Docker
 
+```bash
+$ docker-compose up --build -d
+$ docker build -t webhook .
+$ docker run -p 3000:3000 -v $(pwd)/config.toml:/app/config.toml webhook
 ```
-$ ...
-``` -->
