@@ -54,7 +54,7 @@ export class WorkflowJobEvent extends Event {
         workflow_job.started_at,
         workflow_job.completed_at
       );
-      
+
       fields.push({
         name: "Duration",
         value: duration,
@@ -98,6 +98,7 @@ export class WorkflowJobEvent extends Event {
         workflow_job.started_at && workflow_job.completed_at ? `! Duration: ${Webhook.formatDuration(workflow_job.started_at, workflow_job.completed_at)}` : "",
         "```"
       ].filter(line => line !== "").join("\n"),
+      color: embedColor,
       fields: [
         {
           name: `\`${workflow_job.name}\``,
