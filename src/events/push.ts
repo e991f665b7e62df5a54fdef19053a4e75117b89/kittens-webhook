@@ -70,7 +70,7 @@ export class PushEvent extends Event {
       for (const commit of commitsToShow) {
         const commitMessage = Webhook.truncate(commit.message, 100);
         const shortSha = commit.id.substring(0, 7);
-        
+
         fields.push({
           name: `\`${shortSha}\` by ${commit.author.name}`,
           value: `\`\`\`\n${commitMessage}\n\`\`\``,
@@ -98,6 +98,7 @@ export class PushEvent extends Event {
         fileChanges.modified.length > 0 ? `! Modified ${fileChanges.modified.length} ${fileChanges.modified.length === 1 ? "file" : "files"}` : "",
         "```"
       ].filter(line => line !== "").join("\n"),
+      color: config.embed_color,
       fields: commits.map((commit: any) => ({
         name: `\`${commit.id.slice(0, 8)}\``,
         value: `\`\`\`fix\n${commit.message.slice(0, 50 - 3)}${commit.message.length > 50 ? "..." : ""}\n\`\`\``,

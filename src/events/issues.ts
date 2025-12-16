@@ -47,7 +47,7 @@ export class IssuesEvent extends Event {
       const labelText = issue.labels
         .map(label => `\`${label.name}\``)
         .join(", ");
-      
+
       fields.push({
         name: "Labels",
         value: labelText,
@@ -60,7 +60,7 @@ export class IssuesEvent extends Event {
       const assigneeText = issue.assignees
         .map(assignee => `[@${assignee.login}](https://github.com/${assignee.login})`)
         .join(", ");
-      
+
       fields.push({
         name: "Assignees",
         value: assigneeText,
@@ -85,6 +85,7 @@ export class IssuesEvent extends Event {
         issue.labels.length > 0 ? `! ${issue.labels.length} ${issue.labels.length === 1 ? "label" : "labels"} applied` : "",
         "```"
       ].filter(line => line !== "").join("\n"),
+      color: config.embed_color,
       fields: [
         {
           name: `\`#${issue.number}\``,
