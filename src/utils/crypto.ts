@@ -1,3 +1,5 @@
+import { Logger } from "./logger";
+
 /**
  * Cryptographic utilities for webhook verification
  */
@@ -31,7 +33,7 @@ export class CryptoUtils {
         new TextEncoder().encode(payload)
       );
     } catch (error) {
-      console.error("Signature verification failed:", error);
+      Logger.error(`Signature verification failed: ${error}`);
       return false;
     }
   }
